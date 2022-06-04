@@ -49,9 +49,11 @@ def register(request):
     return render(request, 'user/register.html', context)
 
 def profile(request):
+    user_form = UpdateUserForm(instance=request.user)
+    profile_form = UserProfileForm(instance=request.user)
     if request.method == 'POST':
-        user_form = UpdateUserForm(request.POST, instance=request.user)
-        profile_form = UserProfileForm(request.POST, instance=request.user.profile)
+        user_form = UpdateUserForm(request.POST,request.FILES, instance=request.user)
+        profile_form = UserProfileForm(request.POST, request.FILES, instance=request.user)
         
       
         if user_form.is_valid() and profile_form.is_valid():
@@ -63,7 +65,7 @@ def profile(request):
     else:
         user_form = UpdateUserForm(instance=request.user)
         profile_form = UserProfileForm(instance=request.user)
-    
+        # print(request.user.profile)
     context = {
         'profile_form': profile_form,
         'user_form' : user_form
