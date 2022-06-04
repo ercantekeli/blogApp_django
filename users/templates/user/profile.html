@@ -1,11 +1,15 @@
 {% extends 'blog/base.html' %} 
 {% block content %}
  {% load crispy_forms_tags %}
+ {% load static %}
 <div class="mx-5">
-<img class="rounded-circle account-img" src="{{ user.image.url }}" alt="image">
+{% if profile_form.instance.image %}
+<img class="rounded-circle account-img" src="{{ profile_form.instance.image.url }}" alt="image">
+{% else %}
+<img class="rounded-circle account-img" src="{% static 'media/default-avatar.png' %}" alt="default image">
 <h2>Profile</h2>
 <hr>
-
+{% endif %}
 
 
 <h3>Thanks for registering</h3>
@@ -15,8 +19,8 @@
 
 <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %} 
-    {{ form_profile | crispy }}
-    <button type="submit" class="btn btn-danger">Sign Up</button>
+    {{ profile_form | crispy }}
+    <button type="submit" class="btn btn-danger">Update</button>
     <hr>
     <span>Already have an account?</span>
     <a href="{% url 'user_login' %}">Update</a>
