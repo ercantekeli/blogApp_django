@@ -6,7 +6,7 @@
 {% if profile_form.instance.image %}
 <img class="rounded-circle account-img" src="{{ profile_form.instance.image.url }}" alt="image">
 {% else %}
-<img class="rounded-circle account-img"  src='https://www.ekdergi.com/wp-content/uploads/2017/09/default-avatar.jpg' alt="default image">
+<img class="rounded-circle account-img"  src="{% static '../../../../../media/kitten.jpg' %}" alt="default image">
 <h2>Profile</h2>
 <hr>
 {% endif %}
